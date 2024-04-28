@@ -69,8 +69,8 @@
 ###  Download Snapshot(optional)
 	SNAP_NAME=$(curl -s https://ss-t.mantra.nodestake.org/ | egrep -o ">20.*\.tar.lz4" | tr -d ">")
 
-curl -o - -L https://ss-t.mantra.nodestake.org/${SNAP_NAME}  | lz4 -c -d - | tar -x -C $HOME/.mantrachain
+	curl -o - -L https://ss-t.mantra.nodestake.org/${SNAP_NAME}  | lz4 -c -d - | tar -x -C $HOME/.mantrachain
 
 ###  Launch Node
-sudo systemctl restart mantrachaind
-journalctl -u mantrachaind -f
+	sudo systemctl restart mantrachaind
+	journalctl -u mantrachaind -f
