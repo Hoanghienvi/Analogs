@@ -1,4 +1,5 @@
-# Mantrachain-Hongbai-testnet
+### Mantrachain-Hongbai-testnet
+
 ###
 Update system and install build tools
 sudo apt update
@@ -51,7 +52,7 @@ curl -Ls https://ss-t.mantra.nodestake.org/genesis.json > $HOME/.mantrachain/con
 ### Download addrbook
 curl -Ls https://ss-t.mantra.nodestake.org/addrbook.json > $HOME/.mantrachain/config/addrbook.json
 
-Create Service
+###  Create Service
 sudo tee /etc/systemd/system/mantrachaind.service > /dev/null <<EOF
 [Unit]
 Description=mantrachaind Daemon
@@ -65,14 +66,16 @@ LimitNOFILE=65535
 [Install]
 WantedBy=multi-user.target
 EOF
+
+### 
 sudo systemctl daemon-reload
 sudo systemctl enable mantrachaind
 
-Download Snapshot(optional)
+###  Download Snapshot(optional)
 SNAP_NAME=$(curl -s https://ss-t.mantra.nodestake.org/ | egrep -o ">20.*\.tar.lz4" | tr -d ">")
 
 curl -o - -L https://ss-t.mantra.nodestake.org/${SNAP_NAME}  | lz4 -c -d - | tar -x -C $HOME/.mantrachain
 
-Launch Node
+###  Launch Node
 sudo systemctl restart mantrachaind
 journalctl -u mantrachaind -f
